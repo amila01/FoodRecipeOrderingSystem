@@ -31,11 +31,11 @@ const FoodCards = ({food}) => {
                 </Card.Text>
             </Card.Body>
             <ListGroup className="list-group-flush">
-                <ListGroupItem><FaStar/><FaStar/><FaStar/><FaStar/><FaStarHalfAlt/> </ListGroupItem>
+                <ListGroupItem style={{color:"orange"}}><FaStar /><FaStar/><FaStar/><FaStar/><FaStarHalfAlt/> </ListGroupItem>
             </ListGroup>
             <Card.Footer>
                 by-
-                <Card.Link href="#">Author</Card.Link>
+                <Card.Link href="#">{food.author}</Card.Link>
             </Card.Footer>
             </Card>
 

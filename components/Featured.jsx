@@ -1,6 +1,7 @@
 import styles from "../styles/Featured.module.css";
 import Image from "next/image";
 import { useState } from "react";
+import SearchBar from "./SearchBar";
 
 const Featured = () => {
 

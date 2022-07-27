@@ -11,6 +11,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { reset } from "../redux/cartSlice";
 import OrderDetail from "../components/OrderDetail";
+import { useSession, signIn, signOut, getSession } from "next-auth/react";
 
 const Cart = () => {
   const cart = useSelector(state=>state.cart);
@@ -21,7 +22,15 @@ const Cart = () => {
     const style ={"layout":"vertical"};
     const dispatch = useDispatch();
   const router = useRouter();
+  const foodIds =[]
+  const chefIds =[]
 
+  
+  const profile = useSelector((state) => state.profile);
+  const { loading, error, dbUser } = profile;
+  // console.log("cart-user", dbUser.name);
+  // console.log("cart-user", dbUser._id);
+  console.log("cartyy", cart)
 
   const createOrder = async (data) => {
     try {
@@ -52,8 +61,11 @@ const ButtonWrapper = ({ currency, showSpinner }) => {
       });
   }, [currency, showSpinner]);
 
+  
+
 
   return (<>
+          
           { (showSpinner && isPending) && <div className="spinner" /> }
           <PayPalButtons
               style={style}
@@ -81,9 +93,12 @@ const ButtonWrapper = ({ currency, showSpinner }) => {
                   return actions.order.capture().then(function (details) {
                       const shipping = details.purchase_units[0].shipping;
                       createOrder({
-                        customer:shipping.name.full_name,
+                        customer:dbUser.name,
+                        cusId:dbUser._id,
                         address:shipping.address.address_line_1,
                         total:cart.total,
+                        proIds: [...foodIds],
+                        authIds: [...chefIds],
                         method:1,
                       });
                   });
@@ -92,7 +107,14 @@ const ButtonWrapper = ({ currency, showSpinner }) => {
       </>
   );
 }
-
+const handleId = (e)=>{
+  foodIds.push(e)
+  // console.log("kema",[...foodIds]) 
+}
+const handleAuthId = (e)=>{
+  chefIds.push(e)
+  console.log("authids",[...chefIds]) 
+}
   return (
     <div className={styles.container}>
       <div className={styles.left}>
@@ -109,8 +131,9 @@ const ButtonWrapper = ({ currency, showSpinner }) => {
           </tbody>
 
           <tbody>
-            {cart.products.map((product)=>(          
-              <tr className={styles.tr} key={product._id}>
+            {cart.products.map((product)=>(  
+                   
+              <tr className={styles.tr} key={product._id} >
                 <td>
                   <div className={styles.imgContainer}>
                     <Image
@@ -118,11 +141,12 @@ const ButtonWrapper = ({ currency, showSpinner }) => {
                       layout="fill"
                       objectFit="cover"
                       alt=""
+                      onChange={handleId(product._id)} 
                       />
                   </div>
                 </td>
                 <td>
-                  <span className={styles.name}>{product.title}</span>
+                  <span className={styles.name} onChange={handleAuthId(product.authId)}>{product.title} {product.authId}</span>
                 </td>
                 <td>
                   <span className={styles.extras}>
@@ -183,6 +207,7 @@ const ButtonWrapper = ({ currency, showSpinner }) => {
 
     </div>
   );
+  
 };
 
 export default Cart;

@@ -1,12 +1,12 @@
 import styles from '../styles/Add.module.css';
 
-const AddButton = ({setClose}) => {
+const AddButton = ({name,setClose}) => {
   return (
         <div 
             className={styles.mainAddButton}
             onClick={()=>setClose(false)}
         >
-            Add New Recipe
+            {name}
         </div>
   );
 };

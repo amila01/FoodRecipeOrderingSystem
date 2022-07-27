@@ -75,6 +75,10 @@
     width: 25%;
 }
 
+.inputSt {
+    width: 75%;
+}
+
 .extra {
     display: flex;
     justify-content: space-between;
@@ -98,12 +102,9 @@
 }
 
 .addButton {
-    width: 25%;
-    border: none;
-    background-color: teal;
-    color: #fff;
     font-weight: 500;
     cursor: pointer;
-    padding: 5px 0;
     align-self: flex-end;
+    display: flex;
+    margin: 0 auto;
 }

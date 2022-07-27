@@ -18,9 +18,9 @@ export default async function handler(req, res) {
     }
 
     if (method === "PUT") {
-        if (!token || token !== process.env.token) {
-            return res.status(401).json("not Authenticated");
-        }
+        // if (!token || token !== process.env.token) {
+        //     return res.status(401).json("not Authenticated");
+        // }
         try {
             const product = await Product.findByIdAndUpdate(id, req.body, {
                 new: true,

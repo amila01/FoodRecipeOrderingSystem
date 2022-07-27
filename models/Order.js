@@ -6,6 +6,11 @@ const OrderSchema = new mongoose.Schema({
         required: true,
         maxlength: 60
     },
+    cusId: {
+        type: String,
+        required: true,
+        maxlength: 300
+    },
     address: {
         type: String,
         required: true,
@@ -14,6 +19,12 @@ const OrderSchema = new mongoose.Schema({
     total: {
         type: Number,
         required: true,
+    },
+    proIds: {
+        type: [String],
+    },
+    authIds: {
+        type: [String],
     },
     status: {
         type: Number,

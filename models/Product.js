@@ -9,19 +9,29 @@ const ProdctSchema = new mongoose.Schema({
     desc: {
         type: String,
         required: true,
-        maxlength: 200
+        maxlength: 1200
     },
     img: {
         type: String,
         required: true,
     },
-    prices: {
-        type: [Number],
-        required: true
+    author: {
+        type: String,
+        required: true,
+        maxlength: 60
+    },
+    authId: {
+        type: String,
+        required: true,
+        maxlength: 300
     },
     extraOptions: {
         type: [{ text: { type: String, required: true }, price: { type: Number, required: true }, amount: { type: Number, required: true } }]
     },
+    steps: {
+        type: [{ text: { type: String, required: true } }]
+    }
+
 }, { timestamps: true });
 
 export default mongoose.models.Product || mongoose.model("Product", ProdctSchema);

@@ -1,0 +1,29 @@
+.container {
+    align-items: center;
+    justify-content: center;
+    width: 40%;
+    margin-bottom: 100px;
+}
+
+.title {
+    /* justify-content: center; */
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 10px;
+}
+
+.btn {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 750px;
+    margin-top: 5px;
+}
+
+.gbtn {
+    width: 100px;
+}
+
+.sec {
+    align-items: flex-end;
+}
